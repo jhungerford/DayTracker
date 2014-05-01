@@ -1,0 +1,2 @@
+Background images: http://subtlepatterns.com/
+Colors: http://bootflat.github.io/documentation.html

@@ -2,68 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
     <title>DayTracker Mockup</title>
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/daytracker.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/foundation.css" />
+	<link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/daytracker.css" />
 </head>
 <body>
-    <div class="topbar">
-        <div class="fill">
-            <div class="container">
-                <a class="brand" href="#">Day Tracker</a>
+<div class="row log-row">
+	<div class="small-2 columns">
+		<h3 class="text-right">Today, I</h3>
+	</div>
+	<div class="small-10 columns">
+		<form>
+			<input type="text" placeholder="did something awesome" />
+		</form>
+	</div>
+</div>
 
-				<form action="" class="pull-right">
-					<input class="input-small" type="text" placeholder="Username" />
-					<input class="input-small" type="password" placeholder="Password" />
-					<button class="btn" type="submit">Sign In</button>
-				</form>
-            </div>
-        </div>
-    </div>
+<div class="row">
+	<div class="small-12 columns">
+		<h4>Yesterday, I</h4>
+		<ul>
+			<li>Ran 3 miles in 34 minutes</li>
+			<li>Climbed for 2 hours</li>
+			<li>Sent an 11a on lead</li>
+			<li>Rode 5 miles</li>
+		</ul>
 
-    <div class="container">
-        <div class="content">
-            <div class="page-header">
-                <h1>What did you do today?</h1>
-				<form action="">
-					<input class="input span14" type="text" placeholder="Today I ..." />
-					<button class="btn span2" type="submit">Remember</button>
-				</form>
-            </div>
+		<h4>On April 26, I</h4>
+		<ul>
+			<li>Biked up to NCAR from home</li>
+			<li>Played TESO all day</li>
+		</ul>
+	</div>
+</div>
 
-            <div class="row">
-				<div class="span16">
-					<h2>Here's what you did in the past</h2>
-
-					<h5>Yesterday I...</h5>
-					<ul>
-						<li>Had a normal day at work</li>
-						<li>Worked out for 1 hour</li>
-						<li>Fixed 0 bugs</li>
-					</ul>
-					
-					<h5>On Thursday, January 13 I...</h5>
-					<ul>
-						<li>Got to work at 5</li>
-						<li>Fixed 7 bugs</li>
-					</ul>
-					
-					<div class="pagination">
-						<ul>
-							<li class="prev disabled"><a href="#">&larr; Previous</a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li class="next"><a href="#">Next &rarr;</a></li>
-						</ul>
-					</div>
-				</div>
-            </div>
-        </div>
-
-        <footer>
-            <p>&copy; John Hungerford 2012</p>
-        </footer>
-    </div>
+<div class="footer">
+	<div class="row full">
+		<div class="large-12 columns">
+			<p class="copyright">Copyright &copy; John Hungerford, 2014</p>
+		</div>
+	</div>
+</div>
 </body>
 </html>
