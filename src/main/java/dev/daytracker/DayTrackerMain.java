@@ -5,6 +5,7 @@ import com.yammer.dropwizard.assets.AssetsBundle;
 import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Configuration;
 import com.yammer.dropwizard.config.Environment;
+import dev.daytracker.api.DaysResource;
 
 public class DayTrackerMain extends Service<Configuration> {
 
@@ -15,7 +16,9 @@ public class DayTrackerMain extends Service<Configuration> {
 		bootstrap.addBundle(new AssetsBundle("/html", "/", "index.html"));
 	}
 
-	public void run(Configuration configuration, Environment environment) throws Exception {}
+	public void run(Configuration configuration, Environment environment) throws Exception {
+		environment.addResource(DaysResource.class);
+	}
 
 	public static void main(String[] args) throws Exception {
 		new DayTrackerMain().run(args);

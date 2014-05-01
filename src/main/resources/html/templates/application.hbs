@@ -11,19 +11,14 @@
 
 <div class="row">
 	<div class="small-12 columns">
-		<h4>Yesterday, I</h4>
-		<ul>
-			<li>Ran 3 miles in 34 minutes</li>
-			<li>Climbed for 2 hours</li>
-			<li>Sent an 11a on lead</li>
-			<li>Rode 5 miles</li>
-		</ul>
-
-		<h4>On April 26, I</h4>
-		<ul>
-			<li>Biked up to NCAR from home</li>
-			<li>Played TESO all day</li>
-		</ul>
+		{{#each}}
+			<h4>{{day}}, I</h4>
+			<ul>
+				{{#each activities}}
+					<li>{{.}}</li>
+				{{/each}}
+			</ul>
+		{{/each}}
 	</div>
 </div>
 
