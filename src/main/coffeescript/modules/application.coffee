@@ -18,4 +18,5 @@ define ['app', 'ember', 'text!/templates/application.hbs', 'text!/templates/acti
 
 	App.ApplicationRoute = Ember.Route.extend
 		model: ->
-			Ember.$.getJSON('/api/v1/days').then (data) -> data
+			timezoneOffsetMS = new Date().getTimezoneOffset() * 60 * 1000
+			Ember.$.getJSON('/api/v1/activity/days?tzms=' + timezoneOffsetMS).then (data) -> data

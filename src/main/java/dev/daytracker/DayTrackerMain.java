@@ -12,7 +12,6 @@ import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
 import com.yammer.metrics.core.HealthCheck;
 import dev.daytracker.api.ActivityResource;
-import dev.daytracker.api.DaysResource;
 import dev.daytracker.config.DayTrackerConfiguration;
 import dev.daytracker.es.ManagedElasticSearch;
 import dev.daytracker.guice.ConfigurationModule;
@@ -21,7 +20,6 @@ import dev.daytracker.guice.ElasticSearchModule;
 import dev.daytracker.health.ElasticSearchHealth;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DayTrackerMain extends Service<DayTrackerConfiguration> {
@@ -46,7 +44,6 @@ public class DayTrackerMain extends Service<DayTrackerConfiguration> {
 		environment.addHealthCheck(injector.getInstance(ElasticSearchHealth.class));
 
 		// TODO: auto-register resources?
-		environment.addResource(injector.getInstance(DaysResource.class));
 		environment.addResource(injector.getInstance(ActivityResource.class));
 	}
 
