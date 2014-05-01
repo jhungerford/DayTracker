@@ -17,18 +17,19 @@ public class DaysResource {
 
 	@GET
 	public List<Day> all() {
+		// Today is 4/30/14.  All times are the start of the day in MDT
 		return Arrays.asList(
-				new Day(1398816000, Arrays.asList(
+				new Day(1398837600000L, Arrays.asList( // 4/30
 						"Started DayTracker (again)",
 						"Rode 5 miles to work in the wind"
 				)),
-				new Day(1398729600, Arrays.asList(
+				new Day(1398751200000L, Arrays.asList( // 4/29
 						"Ran 3 miles in 34 minutes",
 						"Climbed for 2 hours",
 						"Sent an 11a on lead",
 						"Rode 5 miles to work"
 				)),
-				new Day(1398470400, Arrays.asList(
+				new Day(1398492000000L, Arrays.asList( // 4/26
 						"Biked up to NCAR from home",
 						"Plaed TESO all day"
 				))
