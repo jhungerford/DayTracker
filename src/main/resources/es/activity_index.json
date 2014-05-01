@@ -1,0 +1,11 @@
+{
+	"mappings":{
+		"activity":{
+			"properties": {
+				"userId": {"type": "long"},
+				"timestamp": {"type": "long"},
+				"text": {"type": "string"}
+			}
+		}
+	}
+}
