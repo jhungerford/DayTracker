@@ -1,0 +1,23 @@
+body {
+	color: #434A54;
+}
+
+.log-row {
+	padding-top: 1rem;
+	height: 4rem;
+	background: url(/web/img/skulls.png) repeat 0 0;
+}
+
+.log-row h3 {
+	color: #656D78;
+}
+
+.footer {
+	text-align: center;
+}
+
+.footer .copyright {
+	margin: 6px 0 0;
+	font-size: 0.7rem;
+	color: #666666;
+}
