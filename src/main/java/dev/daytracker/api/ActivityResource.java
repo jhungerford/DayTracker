@@ -59,7 +59,7 @@ public class ActivityResource {
 			long activityDay = getDay(activity.getTimestamp(), timezoneMS);
 
 			if (activityDay != dayMS) {
-				day = new Day(activityDay - timezoneMS, new ArrayList<String>());
+				day = new Day(activityDay + timezoneMS, new ArrayList<String>());
 				days.add(day);
 				dayMS = activityDay;
 			}
@@ -71,7 +71,6 @@ public class ActivityResource {
 	}
 
 	private long getDay(long timestampMS, long timezoneOffsetMS) {
-		// TODO: this timezone math is whack, but I'm tired and it's after 11 (when this bug happens)
-		return (timestampMS / DAY_MS) * DAY_MS + timezoneOffsetMS;
+		return ((timestampMS - timezoneOffsetMS) / DAY_MS) * DAY_MS;
 	}
 }

@@ -7,13 +7,13 @@ define ['ember'], (Ember) ->
 		dayMS = 24 * 60 * 60 * 1000;
 		now = new Date()
 		timezoneMS = now.getTimezoneOffset() * 60 * 1000
-		today = Math.floor(now.getTime() / dayMS) * dayMS + timezoneMS
+		today = Math.floor((now.getTime()) / dayMS) * dayMS - timezoneMS
 
-		if (value >= today)
-			'Today'
 		if (value >= (today - dayMS))
-			'Yesterday'
+			'Today'
 		else if (value >= (today - 2 * dayMS))
+			'Yesterday'
+		else if (value >= (today - 3 * dayMS))
 			'Two days ago'
 		else if (value >= (today - 7 * dayMS))
 			'Last ' + days[new Date(value).getDay()]
