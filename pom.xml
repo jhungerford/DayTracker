@@ -30,6 +30,13 @@
 			<artifactId>elasticsearch</artifactId>
 			<version>1.1.1</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.yammer.dropwizard</groupId>
+			<artifactId>dropwizard-testing</artifactId>
+			<version>${dropwizard-version}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
