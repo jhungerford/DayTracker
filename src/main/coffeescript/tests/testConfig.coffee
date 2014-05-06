@@ -1,3 +1,4 @@
+# TODO: figure out how to eliminate code duplicated between testConfig and config
 require.config
 	deps: ['app', 'routes', 'handlebarHelpers', 'tests/tests']
 
@@ -8,6 +9,7 @@ require.config
 		emberData: 'libs/ember/ember-data'
 		handlebars: 'libs/handlebars/handlebars'
 		jQuery: 'libs/jquery/jquery'
+		mockJax: 'libs/jquery/jquery.mockjax'
 		text: 'libs/require/text'
 		qUnit: 'libs/qunit/qunit'
 
@@ -16,6 +18,9 @@ require.config
 			exports: 'jQuery'
 			init: () ->
 				@.jQuery.noConflict()
+
+		mockJax:
+			deps: ['jQuery']
 
 		ember:
 			deps: ['jQuery', 'handlebars']
