@@ -1,4 +1,4 @@
-define ['ember'], (Ember) ->
+define ['ember', 'mockJax'], (Ember) ->
 	TestUtils = {
 		createView: (template, context) ->
 			context = {} unless context
@@ -12,6 +12,13 @@ define ['ember'], (Ember) ->
 		appendView: (view) ->
 			Ember.run ->
 				view.appendTo('#qunit-view')
+
+		stubAjax: (url, method, json) ->
+			Ember.$.mockjax
+				url: url
+				dataType: 'json'
+				url: url
+				responseText: json
 	}
 
 	TestUtils
