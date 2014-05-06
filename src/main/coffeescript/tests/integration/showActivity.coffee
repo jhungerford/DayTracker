@@ -3,16 +3,20 @@ define ['app', 'tests/testUtils'], (App, TestUtils) ->
 		module 'Integration: showActivity',
 			teardown: -> App.reset()
 
-		test 'hello', -> ok true, 'true is tautological'
-
 		test 'visit /, list all activity', ->
-			expect 1
+			expect 2
 
-			TestUtils.stubAjax '/api/v1/activity/days', 'GET', '[{"day":1399096800000,"activities":["Tested DayTracker"]}]'
+			activity = [{
+				day: new Date().getTime()
+				activities: ['Tested DayTracker']
+			}]
+
+			TestUtils.stubAjax '/api/v1/activity/days', 'GET', JSON.stringify(activity)
 
 			visit '/'
 
 			andThen ->
+				equal find('h4').text(), 'Today, I'
 				equal find('li:last').text(), 'Tested DayTracker'
 
 
