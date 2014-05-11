@@ -7,6 +7,7 @@ require ['app', 'ember', 'qUnit',
 	App.rootElement = '#qunit-fixture' # Hidden property - override css to make it visible.
 
 	Ember.$.mockjaxSettings.logging = true
+	Ember.$.mockjaxSettings.throwUnmocked = true
 	Ember.$.mockjaxSettings.responseTime = 0
 
 	App.setupForTesting()

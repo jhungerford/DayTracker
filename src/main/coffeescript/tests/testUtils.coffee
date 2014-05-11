@@ -1,4 +1,4 @@
-define ['ember', 'mockJax'], (Ember) ->
+define ['ember'], (Ember) ->
 	TestUtils = {
 		createView: (template, context) ->
 			context = {} unless context
@@ -16,9 +16,12 @@ define ['ember', 'mockJax'], (Ember) ->
 		stubAjax: (url, method, json) ->
 			Ember.$.mockjax
 				url: url
-				dataType: 'json'
-				url: url
+#				dataType: 'json'
 				responseText: json
+
+		now: -> new Date().getTime()
+
+		daysBack: (numDays) -> @now() - numDays * 24 * 60 * 60 * 1000
 	}
 
 	TestUtils
