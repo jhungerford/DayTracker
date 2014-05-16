@@ -1,0 +1,14 @@
+{{render "activityInput"}}
+
+<div class="row">
+	<div class="small-12 columns">
+		{{#each}}
+			<h4 class="activityTitle">{{logDate day}}, I</h4>
+			<ul>
+				{{#each activities}}
+					<li class="activity">{{.}}</li>
+				{{/each}}
+			</ul>
+		{{/each}}
+	</div>
+</div>
