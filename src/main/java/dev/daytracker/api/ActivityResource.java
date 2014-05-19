@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.util.List;
 
-@Path("v1/activity")
+@Path("v1/activities")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ActivityResource {
@@ -22,17 +22,46 @@ public class ActivityResource {
 	private ActivityDao activityDao;
 
 	@GET
-	public List<Activity> all() throws IOException {
-		return activityDao.findAll();
+	public ActivityResponse all() throws IOException {
+		return new ActivityResponse(activityDao.findAll());
 	}
 
 	@POST
-	public Response create(Activity activity) throws IOException {
+	public Response create(ActivityRequest activityRequest) throws IOException {
+		Activity activity = activityRequest.getActivity();
 		log.debug("Create activity: {}", activity);
 
 		activity.setUserId(-1L);
 		activityDao.save(activity);
 
 		return Response.noContent().build();
+	}
+
+	private static class ActivityResponse {
+		public List<Activity> activities;
+
+		private ActivityResponse(List<Activity> activities) {
+			this.activities = activities;
+		}
+
+		public List<Activity> getActivities() {
+			return activities;
+		}
+
+		public void setActivities(List<Activity> activities) {
+			this.activities = activities;
+		}
+	}
+
+	private static class ActivityRequest {
+		public Activity activity;
+
+		public Activity getActivity() {
+			return activity;
+		}
+
+		public void setActivity(Activity activity) {
+			this.activity = activity;
+		}
 	}
 }

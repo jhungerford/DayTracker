@@ -1,16 +1,26 @@
 package dev.daytracker.model;
 
-public class Activity {
+public class Activity implements Identifyable {
+	private String id;
 	private Long userId;
 	private long timestamp;
 	private String text;
 
 	public Activity() {}
 
-	public Activity(long userId, long timestamp, String text) {
+	public Activity(String id, long userId, long timestamp, String text) {
+		this.id = id;
 		this.userId = userId;
 		this.timestamp = timestamp;
 		this.text = text;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public Long getUserId() {

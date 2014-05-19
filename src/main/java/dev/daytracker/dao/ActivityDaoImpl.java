@@ -3,6 +3,7 @@ package dev.daytracker.dao;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.daytracker.es.ESIndex;
 import dev.daytracker.model.Activity;
+import dev.daytracker.model.Identifyable;
 import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
@@ -46,11 +47,13 @@ public class ActivityDaoImpl implements ActivityDao {
 		request.execute().actionGet();
 	}
 
-	private <T> List<T> parseHits(SearchHits hits, Class<T> type) throws IOException {
+	private <T extends Identifyable> List<T> parseHits(SearchHits hits, Class<T> type) throws IOException {
 		List<T> values = new ArrayList<>();
 
 		for (SearchHit hit : hits) {
-			values.add(objectMapper.readValue(hit.getSourceAsString(), type));
+			T value = objectMapper.readValue(hit.getSourceAsString(), type);
+			value.setId(hit.getId());
+			values.add(value);
 		}
 
 		return values;

@@ -8,12 +8,15 @@ define ['ember', 'app', 'tests/testUtils'], (Ember, App, TestUtils) ->
 		test 'visit /, one day of activity', ->
 			expect 2
 
-			activity = [{
-				timestamp: TestUtils.now()
-				text: 'Tested DayTracker'
-			}]
+			activity = {
+				activity: [{
+					id: 1
+					timestamp: TestUtils.now()
+					text: 'Tested DayTracker'
+				}]
+			}
 
-			TestUtils.stubAjax '/api/v1/activity', 'GET', JSON.stringify(activity)
+			TestUtils.stubAjax '/api/v1/activities', 'GET', JSON.stringify(activity)
 
 			visit('/activity').then ->
 				equal find('h4').text(), 'Today, I'
@@ -22,15 +25,19 @@ define ['ember', 'app', 'tests/testUtils'], (Ember, App, TestUtils) ->
 		test 'visit /, two days of activity', ->
 			expect 4
 
-			activity = [{
-				timestamp: TestUtils.now()
-				text: 'Did something today'
-			},{
-				timestamp: TestUtils.daysBack(1)
-				text: 'Did something yesterday'
-			}]
+			activity = {
+				activity: [{
+					id: 1
+					timestamp: TestUtils.now()
+					text: 'Did something today'
+				},{
+					id: 2
+					timestamp: TestUtils.daysBack(1)
+					text: 'Did something yesterday'
+				}]
+			}
 
-			TestUtils.stubAjax '/api/v1/activity', 'GET', JSON.stringify(activity)
+			TestUtils.stubAjax '/api/v1/activities', 'GET', JSON.stringify(activity)
 
 			visit('/').then ->
 				equal find('.activityTitle:eq(0)').text(), 'Today, I'
