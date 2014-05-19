@@ -1,5 +1,5 @@
 require.config
-	deps: ['app', 'routes', 'handlebarHelpers']
+	deps: ['app', 'routes', 'utils/handlebarHelpers']
 
 	baseUrl: 'web/js'
 

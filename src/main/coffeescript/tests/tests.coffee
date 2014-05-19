@@ -1,6 +1,10 @@
+# ADD NEW TESTS TO THE REQUIRE ARRAY - IT WILL BE AUTOMATICALLY RUN
 require ['app', 'ember', 'qUnit',
 # Unit Tests
-	'tests/unit/handlebarHelpers',
+	'tests/unit/mixins/comparable'
+	'tests/unit/utils/dates'
+	'tests/unit/utils/handlebarHelpers'
+	'tests/unit/utils/functions'
 # Integration Tests
 	'tests/integration/showActivity'
 ], (App, Ember, QUnit, tests...) ->

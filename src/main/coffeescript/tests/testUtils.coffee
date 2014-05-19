@@ -7,7 +7,7 @@ define ['ember'], (Ember) ->
 				controller: context,
 				template: Ember.Handlebars.compile(template)
 
-			View.create()
+			do View.create
 
 		appendView: (view) ->
 			Ember.run ->

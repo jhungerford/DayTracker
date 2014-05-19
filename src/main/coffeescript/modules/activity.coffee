@@ -1,8 +1,17 @@
-define ['app', 'ember', 'text!/templates/activity.hbs', 'text!/templates/activityInput.hbs'], (App, Ember, activityTemplate, activityInputTemplate) ->
+define ['app', 'ember', 'utils/dates', 'utils/functions', 'text!/templates/activity.hbs', 'text!/templates/activityInput.hbs'], (App, Ember, Dates, F, activityTemplate, activityInputTemplate) ->
 	App.registerTemplate 'activity', activityTemplate
 	App.registerTemplate 'activityInput', activityInputTemplate
 
-	App.ActivityController = Ember.ArrayController.extend()
+	App.ActivityController = Ember.ArrayController.extend
+		groupByDay: (->
+			morningOfTimestampProperty = (item) -> Dates.morning(item.timestamp)
+			# Elements are sorted by timestamp - convert them into a list of lists of activities grouped by day
+			groupedByDay = F.groupSorted(@, morningOfTimestampProperty, F.compareEq)
+			# Turn each element in the list of lists of activities into an object for the view
+			groupedByDay.map (activities) ->
+				day: Dates.morning(activities[0].timestamp)
+				activities: activities.map (activity) -> activity.text
+		).property('@each.timestamp')
 
 	App.ActivityInputController = Ember.Controller.extend
 		actions:
@@ -19,6 +28,4 @@ define ['app', 'ember', 'text!/templates/activity.hbs', 'text!/templates/activit
 					false
 
 	App.ActivityRoute = Ember.Route.extend
-		model: ->
-			timezoneOffsetMS = new Date().getTimezoneOffset() * 60 * 1000
-			Ember.$.getJSON('/api/v1/activity/days') # ?tzms=' + timezoneOffsetMS
+		model: -> Ember.$.getJSON('/api/v1/activity')
