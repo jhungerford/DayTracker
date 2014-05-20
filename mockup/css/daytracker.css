@@ -26,9 +26,8 @@ body {
 	display: flex;
 	align-items: center;
 	margin-bottom: 1rem;
-	border-radius: 3px;
-	box-shadow: rgba(0,0,0,.2) 0 0 5px;
 	background: #F5F7FA;
+	border-top: medium solid #4A89DC;
 }
 
 .day h4 {
