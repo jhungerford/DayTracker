@@ -26,8 +26,8 @@ body {
 	display: flex;
 	align-items: center;
 	margin-bottom: 1rem;
-	/*border-radius: 7px;*/
-	/*box-shadow: rgba(0,0,0,.2) 0 0 4px;*/
+	border-radius: 3px;
+	box-shadow: rgba(0,0,0,.2) 0 0 5px;
 	background: #F5F7FA;
 }
 
@@ -38,6 +38,10 @@ body {
 
 .day ul {
 	margin: 0.5rem 0 0.5rem 0;
+}
+
+.day li:hover {
+	color: #AAB2BD;
 }
 
 .day input, .day a {
