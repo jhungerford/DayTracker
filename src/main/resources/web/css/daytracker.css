@@ -1,15 +1,50 @@
 body {
 	color: #434A54;
+	font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+	background: url(/web/img/ricepaper_v3.png) repeat 0 0;
 }
 
-.log-row {
-	padding-top: 1rem;
-	height: 4rem;
-	background: url(/web/img/skulls.png) repeat 0 0;
+.log {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	height: 3rem;
+	background: #434A54;
 }
 
-.log-row h3 {
-	color: #656D78;
+.logo {
+	margin: 0;
+	color: #F5F7FA;
+}
+
+.log input {
+	height: 3rem;
+	vertical-align: middle;
+	font-size: 1.75rem;
+}
+
+.day {
+	display: flex;
+	align-items: center;
+	margin-bottom: 1rem;
+	background: #F5F7FA;
+	border-top: medium solid #4A89DC;
+}
+
+.day h4 {
+	text-align: center;
+	margin: 0.2rem 0 0.2rem 0;
+}
+
+.day ul {
+	margin: 0.5rem 0 0.5rem 0;
+}
+
+.day li:hover {
+	color: #AAB2BD;
+}
+
+.day input, .day a {
+	margin: 0.2rem 0 0.2rem 0;
 }
 
 .footer {
