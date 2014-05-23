@@ -1,3 +1,4 @@
+@import url("//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");
 meta.foundation-version {
   font-family: "/5.2.2/"; }
 
@@ -1097,12 +1098,12 @@ button, .button {
   padding-bottom: 1.0625rem;
   padding-left: 2rem;
   font-size: 1rem;
-  background-color: #008cba;
+  background-color: #4A89DC;
   border-color: #007095;
   color: white;
   transition: background-color 300ms ease-out; }
   button:hover, button:focus, .button:hover, .button:focus {
-    background-color: #007095; }
+    background-color: #5D9CEC; }
   button:hover, button:focus, .button:hover, .button:focus {
     color: white; }
   button.secondary, .button.secondary {
@@ -1122,13 +1123,19 @@ button, .button {
     button.success:hover, button.success:focus, .button.success:hover, .button.success:focus {
       color: white; }
   button.alert, .button.alert {
-    background-color: #f04124;
+    background-color: #DA4453;
     border-color: #cf2a0e;
     color: white; }
     button.alert:hover, button.alert:focus, .button.alert:hover, .button.alert:focus {
-      background-color: #cf2a0e; }
+      background-color: #ED5565; }
     button.alert:hover, button.alert:focus, .button.alert:hover, .button.alert:focus {
       color: white; }
+  button.aqua, .button.aqua {
+	  background-color: #3BAFDA;
+	  border-color: #007095;
+	  color: white; }
+    button.aqua:hover, button.aqua:focus, .button.aqua:hover, .button.aqua:focus {
+		background-color: #4FC1E9; }
   button.large, .button.large {
     padding-top: 1.125rem;
     padding-right: 2.25rem;
@@ -1147,6 +1154,12 @@ button, .button {
     padding-bottom: 0.6875rem;
     padding-left: 1.25rem;
     font-size: 0.6875rem; }
+  button.inline, .button.inline {
+	padding-top: 0.325rem;
+	padding-right: 1.25rem;
+	padding-bottom: 0.3875rem;
+	padding-left: 1.25rem;
+	font-size: 0.6875rem; }
   button.expand, .button.expand {
     padding-right: 0;
     padding-left: 0;
