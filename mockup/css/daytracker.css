@@ -1,12 +1,23 @@
 body {
 	color: #434A54;
 	font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-	background: url(../img/ricepaper_v3.png) repeat 0 0;
+	background: #E6E9ED;
+}
+
+.mock-header {
+	height: 2rem;
+	background: #434A54;
+}
+
+.log-row {
+	height: 5rem;
+	padding-top: 1rem;
+	margin-bottom: 2rem;
+	background: #F5F7FA;
+	border-bottom: 1px solid #CCD1D9;
 }
 
 .log {
-	margin-top: 2rem;
-	margin-bottom: 2rem;
 	height: 3rem;
 	background: #434A54;
 }
@@ -27,7 +38,8 @@ body {
 	align-items: center;
 	margin-bottom: 1rem;
 	background: #F5F7FA;
-	border-top: medium solid #4A89DC;
+	border: 1px solid #5D9CEC;
+	border-radius: 3px;
 }
 
 .day h4 {
@@ -39,12 +51,75 @@ body {
 	margin: 0.5rem 0 0.5rem 0;
 }
 
-.day li:hover {
+.day li.activity:hover {
 	color: #AAB2BD;
 }
 
 .day input, .day a {
-	margin: 0.2rem 0 0.2rem 0;
+	margin: 0;
+}
+
+.activity-highlight {
+	height: 0.2rem;
+}
+
+.activity-highlight.tags {
+	background: #3BAFDA
+}
+
+.activity-highlight.calendar {
+	background: #4A89DC;
+}
+
+.activity-highlight.delete {
+	background: #DA4453;
+}
+
+.calendar {
+	font-size: 0.75rem;
+	text-align: center;
+}
+
+.cal-1 {
+	width: 14.2857%;
+}
+
+.cal-5 {
+	width: 71.4285%;
+}
+
+.cal-month-row {
+	font-size: 1rem;
+	font-weight: bold;
+}
+
+.cal-dow-row {
+	font-weight: bold;
+	border-bottom: 1px solid #CCD1D9;
+}
+
+.cal-day:hover {
+	background: #5D9CEC;
+	color: #F5F7FA;
+}
+
+.cal-day-off {
+	color: #AAB2BD;
+}
+
+.cal-day-off:hover {
+	background: #AAB2BD;
+	color: #F5F7FA;
+}
+
+.cal-day-selected {
+	background: #4A89DC;
+	color: #F5F7FA;
+}
+
+.cal-day-off-selected {
+	background: #656D78;
+	color: #F5F7FA;
 }
 
 .footer {
