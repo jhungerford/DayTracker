@@ -1,8 +1,0 @@
-===== Running =====
-IntelliJ:
-* Create a run configuration with:
-	Name: DayTracker
-	Main class: dev.daytracker.DayTrackerMain
-	Program arguments: server daytracker.yml
-* Run DayTracker
-* In Maven Projects, run Plugins -> brew -> brew:compile
