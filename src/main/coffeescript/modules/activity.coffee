@@ -1,14 +1,17 @@
-define ['app', 'ember', 'emberData', 'utils/dates', 'utils/functions', 'text!/templates/activity.hbs', 'text!/templates/activityInput.hbs'], (App, Ember, DS, Dates, F, activityTemplate, activityInputTemplate) ->
-	App.registerTemplate 'activity', activityTemplate
+define ['app', 'ember', 'emberData', 'utils/dates', 'utils/functions', 'text!/templates/activities.hbs', 'text!/templates/activityInput.hbs'], (App, Ember, DS, Dates, F, activitiesTemplate, activityInputTemplate) ->
+	App.registerTemplate 'activities', activitiesTemplate
 	App.registerTemplate 'activityInput', activityInputTemplate
 
 	App.Activity = DS.Model.extend
 		timestamp: DS.attr 'number'
 		text: DS.attr 'string'
 
-	App.ActivityController = Ember.ArrayController.extend
+#	App.
+
+	App.ActivitiesController = Ember.ArrayController.extend
 		sortProperties: ['timestamp']
 		sortAscending: false
+#		itemController: ''
 
 		groupByDay: (->
 			morningOfTimestampProperty = (item) -> Dates.morning(item.get('timestamp'))
@@ -30,5 +33,5 @@ define ['app', 'ember', 'emberData', 'utils/dates', 'utils/functions', 'text!/te
 				@set('text', '')
 				do activity.save
 
-	App.ActivityRoute = Ember.Route.extend
+	App.ActivitiesRoute = Ember.Route.extend
 		model: -> @get('store').find('activity')

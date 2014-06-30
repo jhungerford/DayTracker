@@ -2,4 +2,4 @@ define ['app', 'ember', 'text!/templates/application.hbs'], (App, Ember, applica
 	App.registerTemplate 'application', applicationTemplate
 
 	App.ApplicationRoute = Ember.Route.extend
-		beforeModel: -> @transitionTo '/activity'
+		beforeModel: -> @transitionTo '/activities'
