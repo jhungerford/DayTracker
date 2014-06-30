@@ -1,6 +1,6 @@
 package dev.daytracker.config;
 
-import com.yammer.dropwizard.config.Configuration;
+import io.dropwizard.Configuration;
 
 public class DayTrackerConfiguration extends Configuration {
 }

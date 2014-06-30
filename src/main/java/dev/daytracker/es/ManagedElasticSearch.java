@@ -1,6 +1,6 @@
 package dev.daytracker.es;
 
-import com.yammer.dropwizard.lifecycle.Managed;
+import io.dropwizard.lifecycle.Managed;
 import org.elasticsearch.node.Node;
 
 import javax.inject.Inject;

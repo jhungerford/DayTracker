@@ -1,6 +1,7 @@
 package dev.daytracker.health;
 
-import com.yammer.metrics.core.HealthCheck;
+
+import com.codahale.metrics.health.HealthCheck;
 import dev.daytracker.es.ElasticSearchAdmin;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.admin.cluster.health.ClusterHealthStatus;
@@ -14,10 +15,6 @@ public class ElasticSearchHealth extends HealthCheck {
 
 	@Inject
 	private ElasticSearchAdmin esAdmin;
-
-	public ElasticSearchHealth() {
-		super("ElasticSearch");
-	}
 
 	protected Result check() throws Exception {
 		try {

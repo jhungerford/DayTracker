@@ -1,2 +1,2 @@
-http:
-  rootPath: /api/*
+server:
+  type: default

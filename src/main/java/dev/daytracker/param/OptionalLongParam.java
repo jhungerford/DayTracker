@@ -1,6 +1,6 @@
 package dev.daytracker.param;
 
-import com.yammer.dropwizard.jersey.params.LongParam;
+import io.dropwizard.jersey.params.LongParam;
 
 public class OptionalLongParam extends LongParam {
 
