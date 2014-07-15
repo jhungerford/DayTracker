@@ -6,12 +6,23 @@ define ['app', 'ember', 'emberData', 'utils/dates', 'utils/functions', 'text!/te
 		timestamp: DS.attr 'number'
 		text: DS.attr 'string'
 
-#	App.
+	App.ActivitiesEditController = Ember.ObjectController.extend()
+
+	App.ActivityController = Ember.ObjectController.extend
+		needs: 'activitiesEdit'
+
+		isEditing: (->
+			@get('id') is @get('controllers.activitiesEdit.id')
+		).property 'id', 'controllers.activitiesEdit.id'
+
+		actions:
+			edit: ->
+				@transitionToRoute 'activities.edit', @get('id')
+				false
 
 	App.ActivitiesController = Ember.ArrayController.extend
 		sortProperties: ['timestamp']
 		sortAscending: false
-#		itemController: ''
 
 		groupByDay: (->
 			morningOfTimestampProperty = (item) -> Dates.morning(item.get('timestamp'))
@@ -20,7 +31,7 @@ define ['app', 'ember', 'emberData', 'utils/dates', 'utils/functions', 'text!/te
 			# Turn each element in the list of lists of activities into an object for the view
 			groupedByDay.map (activities) ->
 				day: Dates.morning(activities[0].get('timestamp'))
-				activities: activities.map (activity) -> activity.get('text')
+				activities: activities
 		).property('@each.timestamp')
 
 	App.ActivityInputController = Ember.Controller.extend
@@ -35,3 +46,7 @@ define ['app', 'ember', 'emberData', 'utils/dates', 'utils/functions', 'text!/te
 
 	App.ActivitiesRoute = Ember.Route.extend
 		model: -> @get('store').find('activity')
+
+	App.ActivitiesEditRoute = Ember.Route.extend
+		exit: -> @controllerFor('activitiesEdit').set('id', undefined)
+

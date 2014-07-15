@@ -1,4 +1,5 @@
 define ['app', 'modules/application', 'modules/activity'], (App) ->
 	App.Router.map( ->
-		@resource 'activities'
+		@resource 'activities', ->
+			@resource 'activities.edit', {path: '/:id/edit'}
 	)

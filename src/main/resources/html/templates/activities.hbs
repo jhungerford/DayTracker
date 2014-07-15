@@ -7,8 +7,12 @@
 		</div>
 		<div class="small-10 columns">
 			<ul class="no-bullet">
-				{{#each activities}}
-					<li class="activity">{{.}}</li>
+				{{#each activities itemController="activity"}}
+					{{#if isEditing}}
+						<li class="activity">Edit {{text}}</li>
+					{{else}}
+						<li class="activity" {{action 'edit'}}>{{text}}</li>
+					{{/if}}
 				{{/each}}
 			</ul>
 		</div>
