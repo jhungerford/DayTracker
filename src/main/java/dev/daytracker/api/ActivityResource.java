@@ -18,6 +18,8 @@ import java.util.List;
 public class ActivityResource {
 	private static final Logger log = LoggerFactory.getLogger(ActivityResource.class);
 
+	public static final long FAKE_USER_ID = -1L;
+
 	@Inject
 	private ActivityDao activityDao;
 
@@ -31,8 +33,19 @@ public class ActivityResource {
 		Activity activity = activityRequest.getActivity();
 		log.debug("Create activity: {}", activity);
 
-		activity.setUserId(-1L);
+		activity.setUserId(FAKE_USER_ID);
 		activityDao.save(activity);
+
+		return Response.noContent().build();
+	}
+
+	@PUT
+	@Path("/{id}")
+	public Response update(@PathParam("id") String id, ActivityRequest activityRequest) throws IOException {
+		Activity activity = activityRequest.getActivity();
+
+		activity.setUserId(FAKE_USER_ID);
+		activityDao.update(id, activity);
 
 		return Response.noContent().build();
 	}

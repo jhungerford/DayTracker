@@ -17,9 +17,10 @@ define ['app', 'ember', 'emberData', 'utils/dates', 'utils/functions', 'text!/te
 
 		actions:
 			save: ->
-				console.log 'save'
+				@get('model').save().then => @transitionToRoute('activities')
 				false
-
+			# TODO: event should be editable immediatly after it was created (bind id to the model?)
+			# TODO: tab should move to the next event
 			cancel: -> @transitionToRoute 'activities'; false
 			edit: -> @transitionToRoute 'activities.edit', @get('id'); false
 
@@ -27,7 +28,7 @@ define ['app', 'ember', 'emberData', 'utils/dates', 'utils/functions', 'text!/te
 		sortProperties: ['timestamp']
 		sortAscending: false
 
-		groupByDay: (->
+		groupByDay: (-> # TODO: should groupByDay return an ArrayProxy / SortableMixin of the days?
 			morningOfTimestampProperty = (item) -> Dates.morning(item.get('timestamp'))
 			# Elements are sorted by timestamp - convert them into a list of lists of activities grouped by day
 			groupedByDay = F.groupSorted(@, morningOfTimestampProperty, F.compareEq)

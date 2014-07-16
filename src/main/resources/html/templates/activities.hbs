@@ -9,7 +9,7 @@
 			<ul class="no-bullet">
 				{{#each activities itemController="activity"}}
 					{{#if isEditing}}
-						<li class="activity">{{focus-input value=text action="save" escape-press="cancel"}}</li>
+						<li class="activity">{{focus-input value=text action="save" focus-out="save" escape-press="cancel"}}</li>
 					{{else}}
 						<li class="activity" {{action 'edit'}}>{{text}}</li>
 					{{/if}}

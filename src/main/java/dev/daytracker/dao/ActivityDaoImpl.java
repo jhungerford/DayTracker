@@ -7,6 +7,7 @@ import dev.daytracker.model.Identifyable;
 import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.update.UpdateRequestBuilder;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
@@ -44,6 +45,16 @@ public class ActivityDaoImpl implements ActivityDao {
 				.setSource(source);
 
 		// TODO: handle the index response
+		request.execute().actionGet();
+	}
+
+	public void update(String id, Activity activity) throws IOException {
+		String source = objectMapper.writeValueAsString(activity);
+
+		UpdateRequestBuilder request = client.prepareUpdate(ESIndex.ACTIVITY.name, ESIndex.ACTIVITY.type, id)
+				.setRetryOnConflict(5)
+				.setDoc(source);
+
 		request.execute().actionGet();
 	}
 
