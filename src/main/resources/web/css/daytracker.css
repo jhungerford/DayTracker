@@ -51,6 +51,10 @@ body {
 	margin: 0.5rem 0 0.5rem 0;
 }
 
+.day li.activity {
+	min-height: 1rem;
+}
+
 .day li.activity:hover {
 	color: #AAB2BD;
 }
