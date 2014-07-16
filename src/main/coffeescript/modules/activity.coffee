@@ -16,9 +16,12 @@ define ['app', 'ember', 'emberData', 'utils/dates', 'utils/functions', 'text!/te
 		).property 'id', 'controllers.activitiesEdit.id'
 
 		actions:
-			edit: ->
-				@transitionToRoute 'activities.edit', @get('id')
+			save: ->
+				console.log 'save'
 				false
+
+			cancel: -> @transitionToRoute 'activities'; false
+			edit: -> @transitionToRoute 'activities.edit', @get('id'); false
 
 	App.ActivitiesController = Ember.ArrayController.extend
 		sortProperties: ['timestamp']

@@ -18,4 +18,15 @@ define ['ember', 'app', 'utils/dates'], (Ember, App, Dates) ->
 
 	Ember.Handlebars.helper 'logDate', (valueDay) -> Helpers.formatDate(Dates.today(), valueDay)
 
+	# http://emberjs.com/guides/cookbook/user_interface_and_interaction/focusing_a_textfield_after_its_been_inserted/
+	App.FocusInputComponent = Ember.TextField.extend
+		becomeFocused: ( ->
+			input = @$()
+			length = input.val().length
+
+			do input.focus
+			input[0].setSelectionRange(length, length) # Move the cursor to the end of the line.
+			# TODO: should the cursor position be configurable?
+		).on('didInsertElement')
+
 	Helpers
