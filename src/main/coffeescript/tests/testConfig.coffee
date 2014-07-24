@@ -1,6 +1,6 @@
 # TODO: figure out how to eliminate code duplicated between testConfig and config
 require.config
-	deps: ['mockJax', 'app', 'routes', 'handlebarHelpers', 'tests/tests']
+	deps: ['mockJax', 'app', 'routes', 'utils/handlebarHelpers', 'tests/tests']
 
 	baseUrl: 'web/js'
 

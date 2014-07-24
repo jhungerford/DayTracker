@@ -18,7 +18,7 @@ define ['ember', 'app', 'tests/testUtils'], (Ember, App, TestUtils) ->
 
 			TestUtils.stubAjax '/api/v1/activities', 'GET', JSON.stringify(activity)
 
-			visit('/activity').then ->
+			visit('/').then ->
 				equal find('h4').text(), 'Today'
 				equal find('li.activity:last').text(), 'Tested DayTracker'
 
