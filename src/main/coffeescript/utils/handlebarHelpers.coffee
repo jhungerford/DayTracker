@@ -22,11 +22,12 @@ define ['ember', 'app', 'utils/dates'], (Ember, App, Dates) ->
 	App.FocusInputComponent = Ember.TextField.extend
 		becomeFocused: ( ->
 			input = @$()
-			length = input.val().length
+			if input? and input.length > 0
+				length = input.val().length
 
-			do input.focus
-			input[0].setSelectionRange(length, length) # Move the cursor to the end of the line.
-			# TODO: should the cursor position be configurable?
+				do input.focus
+				input[0].setSelectionRange(length, length) # Move the cursor to the end of the line.
+				# TODO: should the cursor position be configurable?
 		).on('didInsertElement')
 
 	Helpers

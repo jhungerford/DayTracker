@@ -1,0 +1,15 @@
+<div class="row collapse">
+	<div class="small-9 columns">
+		{{focus-input value=text action="save" escape-press="cancel"}}
+	</div>
+	<div class="small-1 columns">
+		<a class="button aqua postfix" {{action "toTag"}}><i class="fa fa-tag"></i></a>
+	</div>
+	<div class="small-1 columns">
+		<a class="button postfix" {{action "toCalendar"}}><i class="fa fa-calendar"></i></a>
+	</div>
+	<div class="small-1 columns">
+		<a class="button alert postfix" {{action "toDelete"}}><i class="fa fa-trash-o"></i></a>
+	</div>
+</div>
+{{outlet}}

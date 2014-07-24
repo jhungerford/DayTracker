@@ -1,28 +1,33 @@
-define ['app', 'ember', 'emberData', 'utils/dates', 'utils/functions', 'text!/templates/activities.hbs', 'text!/templates/activityInput.hbs'], (App, Ember, DS, Dates, F, activitiesTemplate, activityInputTemplate) ->
+define ['app', 'ember', 'emberData', 'utils/dates', 'utils/functions', 'text!/templates/activities.hbs', 'text!/templates/activityInput.hbs', 'text!/templates/activityEdit.hbs', 'text!/templates/activityEditTag.hbs', 'text!/templates/activityEditDelete.hbs', 'text!/templates/activityEditCalendar.hbs'],
+(App, Ember, DS, Dates, F, activitiesTemplate, activityInputTemplate, activitiesEditTemplate, activityEditTagTemplate, activityEditDeleteTemplate, activityEditCalendarTemplate) ->
 	App.registerTemplate 'activities', activitiesTemplate
 	App.registerTemplate 'activityInput', activityInputTemplate
+	App.registerTemplate 'activityEdit', activitiesEditTemplate
+	App.registerTemplate 'activitiesEditTag', activityEditTagTemplate
+	App.registerTemplate 'activitiesEditDelete', activityEditDeleteTemplate
+	App.registerTemplate 'activitiesEditCalendar', activityEditCalendarTemplate
 
 	App.Activity = DS.Model.extend
 		timestamp: DS.attr 'number'
 		text: DS.attr 'string'
 
-	App.ActivitiesEditController = Ember.ObjectController.extend()
-
 	App.ActivityController = Ember.ObjectController.extend
-		needs: 'activitiesEdit'
+		needs: 'activities'
 
 		isEditing: (->
-			@get('id') is @get('controllers.activitiesEdit.id')
-		).property 'id', 'controllers.activitiesEdit.id'
+			@get('id') is @get('controllers.activities.selectedId')
+		).property 'id', 'controllers.activities.selectedId'
 
 		actions:
 			save: ->
 				@get('model').save().then => @transitionToRoute('activities')
 				false
-			# TODO: event should be editable immediatly after it was created (bind id to the model?)
+			# TODO: event should be editable immediately after it was created (bind id to the model?)
 			# TODO: tab should move to the next event
 			cancel: -> @transitionToRoute 'activities'; false
-			edit: -> @transitionToRoute 'activities.edit', @get('id'); false
+			toTag: -> @transitionToRoute 'activitiesEditTag', @get('id'); false
+			toDelete: -> @transitionToRoute 'activitiesEditDelete', @get('id'); false
+			toCalendar: -> @transitionToRoute 'activitiesEditCalendar', @get('id'); false
 
 	App.ActivitiesController = Ember.ArrayController.extend
 		sortProperties: ['timestamp']
@@ -38,9 +43,8 @@ define ['app', 'ember', 'emberData', 'utils/dates', 'utils/functions', 'text!/te
 				activities: activities
 		).property('@each.timestamp')
 
-	App.ActivityInputController = Ember.Controller.extend
 		actions:
-			save: ->
+			create: ->
 				activity = @get('store').createRecord 'activity',
 					timestamp: new Date().getTime()
 					text: @get('text')
@@ -51,6 +55,13 @@ define ['app', 'ember', 'emberData', 'utils/dates', 'utils/functions', 'text!/te
 	App.ActivitiesRoute = Ember.Route.extend
 		model: -> @get('store').find('activity')
 
-	App.ActivitiesEditRoute = Ember.Route.extend
-		exit: -> @controllerFor('activitiesEdit').set('id', undefined)
+	App.ActivitiesIndexRoute = Ember.Route.extend
+		setupController: (controller, model) ->
+			@_super(controller, model)
+			@controllerFor('activities').set('selectedId', null)
 
+	App.ActivitiesEditRoute = Ember.Route.extend
+		model: (params) -> @get('store').find('activity', params.id)
+		setupController: (controller, model) ->
+			@_super(controller, model)
+			@controllerFor('activities').set('selectedId', model.get('id'))
