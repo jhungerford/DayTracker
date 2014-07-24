@@ -5,6 +5,7 @@ import dev.daytracker.es.ESIndex;
 import dev.daytracker.model.Activity;
 import dev.daytracker.model.Identifyable;
 import org.elasticsearch.action.index.IndexRequestBuilder;
+import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateRequestBuilder;
@@ -37,7 +38,7 @@ public class ActivityDaoImpl implements ActivityDao {
 		return parseHits(response.getHits(), Activity.class);
 	}
 
-	public void save(Activity activity) throws IOException {
+	public String save(Activity activity) throws IOException {
 		String source = objectMapper.writeValueAsString(activity);
 
 		IndexRequestBuilder request = client.prepareIndex(ESIndex.ACTIVITY.name, ESIndex.ACTIVITY.type)
@@ -45,7 +46,13 @@ public class ActivityDaoImpl implements ActivityDao {
 				.setSource(source);
 
 		// TODO: handle the index response
-		request.execute().actionGet();
+		IndexResponse response = request.execute().actionGet();
+
+		if (response.isCreated()) {
+			return response.getId();
+		}
+
+		return null;
 	}
 
 	public void update(String id, Activity activity) throws IOException {

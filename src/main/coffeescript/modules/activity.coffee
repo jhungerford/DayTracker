@@ -15,14 +15,14 @@ define ['app', 'ember', 'emberData', 'utils/dates', 'utils/functions', 'text!/te
 		needs: 'activities'
 
 		isEditing: (->
-			@get('id') is @get('controllers.activities.selectedId')
+			id = @get('id')
+			id? and id is @get('controllers.activities.selectedId')
 		).property 'id', 'controllers.activities.selectedId'
 
 		actions:
 			save: ->
 				@get('model').save().then => @transitionToRoute('activities')
 				false
-			# TODO: event should be editable immediately after it was created (bind id to the model?)
 			# TODO: tab should move to the next event
 			cancel: -> @transitionToRoute 'activities'; false
 			toTag: -> @transitionToRoute 'activitiesEditTag', @get('id'); false
@@ -51,6 +51,7 @@ define ['app', 'ember', 'emberData', 'utils/dates', 'utils/functions', 'text!/te
 
 				@set('text', '')
 				do activity.save
+			toEdit: (id) -> @transitionToRoute 'activitiesEdit', id; false
 
 	App.ActivitiesRoute = Ember.Route.extend
 		model: -> @get('store').find('activity')

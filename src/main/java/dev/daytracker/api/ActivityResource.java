@@ -24,8 +24,8 @@ public class ActivityResource {
 	private ActivityDao activityDao;
 
 	@GET
-	public ActivityResponse all() throws IOException {
-		return new ActivityResponse(activityDao.findAll());
+	public ActivitiesResponse all() throws IOException {
+		return new ActivitiesResponse(activityDao.findAll());
 	}
 
 	@POST
@@ -34,9 +34,11 @@ public class ActivityResource {
 		log.debug("Create activity: {}", activity);
 
 		activity.setUserId(FAKE_USER_ID);
-		activityDao.save(activity);
+		String id = activityDao.save(activity);
 
-		return Response.noContent().build();
+		activity.setId(id);
+
+		return Response.status(Response.Status.CREATED).entity(new ActivityResponse(activity)).build();
 	}
 
 	@PUT
@@ -51,18 +53,26 @@ public class ActivityResource {
 	}
 
 	private static class ActivityResponse {
-		public List<Activity> activities;
+		public final Activity activity;
 
-		private ActivityResponse(List<Activity> activities) {
+		private ActivityResponse(Activity activity) {
+			this.activity = activity;
+		}
+
+		public Activity getActivity() {
+			return activity;
+		}
+	}
+
+	private static class ActivitiesResponse {
+		public final List<Activity> activities;
+
+		private ActivitiesResponse(List<Activity> activities) {
 			this.activities = activities;
 		}
 
 		public List<Activity> getActivities() {
 			return activities;
-		}
-
-		public void setActivities(List<Activity> activities) {
-			this.activities = activities;
 		}
 	}
 

@@ -8,6 +8,6 @@ import java.util.List;
 public interface ActivityDao {
 
 	List<Activity> findAll() throws IOException;
-	void save(Activity activity) throws IOException;
+	String save(Activity activity) throws IOException;
 	void update(String id, Activity activity) throws IOException;
 }
