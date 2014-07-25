@@ -15,8 +15,10 @@ define ['ember', 'app', 'utils/dates'], (Ember, App, Dates) ->
 				'On ' + valueDay.get('month') + '/' + valueDay.get('date')
 			else
 				'On ' + valueDay.get('month') + '/' + valueDay.get('date') + '/' + valueDay.get('year')
+		formatMonth: (month) -> Dates.months[month - 1]
 
 	Ember.Handlebars.helper 'logDate', (valueDay) -> Helpers.formatDate(Dates.today(), valueDay)
+	Ember.Handlebars.helper 'fullMonth', (valueMonth) -> Helpers.formatMonth(valueMonth)
 
 	# http://emberjs.com/guides/cookbook/user_interface_and_interaction/focusing_a_textfield_after_its_been_inserted/
 	App.FocusInputComponent = Ember.TextField.extend

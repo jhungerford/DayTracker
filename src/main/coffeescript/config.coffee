@@ -1,5 +1,5 @@
 require.config
-	deps: ['app', 'routes', 'utils/handlebarHelpers']
+	deps: ['app', 'routes', 'utils/handlebarHelpers', 'components/date-picker']
 
 	baseUrl: 'web/js'
 

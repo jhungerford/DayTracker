@@ -29,6 +29,25 @@ define ['app', 'ember', 'emberData', 'utils/dates', 'utils/functions', 'text!/te
 			toDelete: -> @transitionToRoute 'activitiesEditDelete', @get('id'); false
 			toCalendar: -> @transitionToRoute 'activitiesEditCalendar', @get('id'); false
 
+	App.ActivitiesEditController = Ember.ObjectController.extend
+		date: (-> Dates.morning(@get('timestamp')) ).property('timestamp')
+
+	App.ActivitiesEditCalendarController = Ember.ObjectController.extend
+		needs: 'activitiesEdit'
+		date: Ember.computed.alias 'controllers.activitiesEdit.date'
+
+		actions:
+			changeDate: (newDate) ->
+				# newDate is a morning - subtract the day difference in days to preserve the activity time.
+				activity = @get('controllers.activitiesEdit.model')
+				activityMS = activity.get('timestamp')
+
+				dayOffset = Dates.morning(activityMS).get('asMS') - newDate.get('asMS')
+				activity.set('timestamp', activityMS - dayOffset)
+
+				activity.save().then => @transitionToRoute('activities')
+				false
+
 	App.ActivitiesController = Ember.ArrayController.extend
 		sortProperties: ['timestamp']
 		sortAscending: false

@@ -63,3 +63,77 @@ define ['ember', 'utils/dates'], (Ember, Dates) ->
 			equal today.compare(yesterday), 1
 			equal yesterday.compare(today), -1
 			equal today.compare(today), 0
+
+		test 'plusMonths', ->
+			expect 12
+
+			janFirst2004 = Dates.morning(1072940401000)
+
+			equal janFirst2004.get('month'), 1
+			equal janFirst2004.plus(1, 'months').get('month'), 2
+			equal janFirst2004.plus(2, 'months').get('month'), 3
+			equal janFirst2004.plus(3, 'months').get('month'), 4
+			equal janFirst2004.plus(4, 'months').get('month'), 5
+			equal janFirst2004.plus(5, 'months').get('month'), 6
+			equal janFirst2004.plus(6, 'months').get('month'), 7
+			equal janFirst2004.plus(7, 'months').get('month'), 8
+			equal janFirst2004.plus(8, 'months').get('month'), 9
+			equal janFirst2004.plus(9, 'months').get('month'), 10
+			equal janFirst2004.plus(10, 'months').get('month'), 11
+			equal janFirst2004.plus(11, 'months').get('month'), 12
+
+		test 'leapYear: 2004', ->
+			equal Dates.leapYear(2004), true
+
+		test 'leapYear: 2005', ->
+			equal Dates.leapYear(2005), false
+
+		test 'leapYear: 1900', ->
+			equal Dates.leapYear(1900), false
+
+		test 'leapYear: 2000', ->
+			equal Dates.leapYear(2000), true
+
+		test 'daysInMonth: February leap year', ->
+			expect 12
+
+			janFirst2004 = Dates.morning(1072940401000)
+
+			equal Dates.daysInMonth(janFirst2004), 31
+			equal Dates.daysInMonth(janFirst2004.plus(1, 'months')), 29
+			equal Dates.daysInMonth(janFirst2004.plus(2, 'months')), 31
+			equal Dates.daysInMonth(janFirst2004.plus(3, 'months')), 30
+			equal Dates.daysInMonth(janFirst2004.plus(4, 'months')), 31
+			equal Dates.daysInMonth(janFirst2004.plus(5, 'months')), 30
+			equal Dates.daysInMonth(janFirst2004.plus(6, 'months')), 31
+			equal Dates.daysInMonth(janFirst2004.plus(7, 'months')), 31
+			equal Dates.daysInMonth(janFirst2004.plus(8, 'months')), 30
+			equal Dates.daysInMonth(janFirst2004.plus(9, 'months')), 31
+			equal Dates.daysInMonth(janFirst2004.plus(10, 'months')), 30
+			equal Dates.daysInMonth(janFirst2004.plus(11, 'months')), 31
+
+		test 'daysInMonth: not leap year', ->
+			expect 12
+
+			janFirst2005 = Dates.morning(1104562801000)
+
+			equal Dates.daysInMonth(janFirst2005), 31
+			equal Dates.daysInMonth(janFirst2005.plus(1, 'months')), 28
+			equal Dates.daysInMonth(janFirst2005.plus(2, 'months')), 31
+			equal Dates.daysInMonth(janFirst2005.plus(3, 'months')), 30
+			equal Dates.daysInMonth(janFirst2005.plus(4, 'months')), 31
+			equal Dates.daysInMonth(janFirst2005.plus(5, 'months')), 30
+			equal Dates.daysInMonth(janFirst2005.plus(6, 'months')), 31
+			equal Dates.daysInMonth(janFirst2005.plus(7, 'months')), 31
+			equal Dates.daysInMonth(janFirst2005.plus(8, 'months')), 30
+			equal Dates.daysInMonth(janFirst2005.plus(9, 'months')), 31
+			equal Dates.daysInMonth(janFirst2005.plus(10, 'months')), 30
+			equal Dates.daysInMonth(janFirst2005.plus(11, 'months')), 31
+
+		test 'startOfMonth jan 1, 2005', ->
+			janFirst2005 = Dates.morning(1104562801000)
+			equal Dates.startOfMonth(janFirst2005), 6
+
+		test 'startOfMonth July 25, 2014', ->
+			date = Dates.morning(1406308887000)
+			equal Dates.startOfMonth(date), 2

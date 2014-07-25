@@ -121,9 +121,12 @@ body {
 	color: #F5F7FA;
 }
 
-.cal-day-off-selected {
+.cal-day-off.cal-day-selected {
 	background: #656D78;
-	color: #F5F7FA;
+}
+
+.cal-day-off.cal-day-selected:hover {
+	background: #AAB2BD;
 }
 
 .footer {
