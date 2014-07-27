@@ -12,4 +12,13 @@
 		<a class="button alert postfix" {{action "toDelete"}}><i class="fa fa-trash-o"></i></a>
 	</div>
 </div>
-{{outlet}}
+{{#if isEditTag}}
+	{{partial "activityEditTag"}}
+{{/if}}
+{{#if isEditDelete}}
+	{{partial "activityEditDelete"}}
+{{/if}}
+{{#if isEditCalendar}}
+	{{partial "activityEditCalendar"}}
+{{/if}}
+

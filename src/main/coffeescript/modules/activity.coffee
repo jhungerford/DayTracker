@@ -3,9 +3,9 @@ define ['app', 'ember', 'emberData', 'utils/dates', 'utils/functions', 'text!/te
 	App.registerTemplate 'activities', activitiesTemplate
 	App.registerTemplate 'activityInput', activityInputTemplate
 	App.registerTemplate 'activityEdit', activitiesEditTemplate
-	App.registerTemplate 'activitiesEditTag', activityEditTagTemplate
-	App.registerTemplate 'activitiesEditDelete', activityEditDeleteTemplate
-	App.registerTemplate 'activitiesEditCalendar', activityEditCalendarTemplate
+	App.registerTemplate 'activityEditTag', activityEditTagTemplate
+	App.registerTemplate 'activityEditDelete', activityEditDeleteTemplate
+	App.registerTemplate 'activityEditCalendar', activityEditCalendarTemplate
 
 	App.Activity = DS.Model.extend
 		timestamp: DS.attr 'number'
@@ -14,39 +14,34 @@ define ['app', 'ember', 'emberData', 'utils/dates', 'utils/functions', 'text!/te
 	App.ActivityController = Ember.ObjectController.extend
 		needs: 'activities'
 
+		date: (-> Dates.morning(@get('timestamp')) ).property('timestamp')
+
 		isEditing: (->
 			id = @get('id')
 			id? and id is @get('controllers.activities.selectedId')
 		).property 'id', 'controllers.activities.selectedId'
 
+		isEditTag: (-> @get('controllers.activities.editType') is 'tag' ).property 'isEditing', 'controllers.activities.editType'
+		isEditDelete: (-> @get('controllers.activities.editType') is 'delete' ).property 'isEditing', 'controllers.activities.editType'
+		isEditCalendar: (-> @get('controllers.activities.editType') is 'calendar' ).property 'isEditing', 'controllers.activities.editType'
+
 		actions:
 			save: ->
 				@get('model').save().then => @transitionToRoute('activities')
+				false
+			changeDate: (newDate) ->
+				# newDate is a morning - subtract the day difference in days to preserve the activity time.
+				activity = @get('model')
+				activityMS = activity.get('timestamp')
+				dayOffset = Dates.morning(activityMS).get('asMS') - newDate.get('asMS')
+				activity.set('timestamp', activityMS - dayOffset)
+				activity.save().then => @transitionToRoute('activities')
 				false
 			# TODO: tab should move to the next event
 			cancel: -> @transitionToRoute 'activities'; false
 			toTag: -> @transitionToRoute 'activitiesEditTag', @get('id'); false
 			toDelete: -> @transitionToRoute 'activitiesEditDelete', @get('id'); false
 			toCalendar: -> @transitionToRoute 'activitiesEditCalendar', @get('id'); false
-
-	App.ActivitiesEditController = Ember.ObjectController.extend
-		date: (-> Dates.morning(@get('timestamp')) ).property('timestamp')
-
-	App.ActivitiesEditCalendarController = Ember.ObjectController.extend
-		needs: 'activitiesEdit'
-		date: Ember.computed.alias 'controllers.activitiesEdit.date'
-
-		actions:
-			changeDate: (newDate) ->
-				# newDate is a morning - subtract the day difference in days to preserve the activity time.
-				activity = @get('controllers.activitiesEdit.model')
-				activityMS = activity.get('timestamp')
-
-				dayOffset = Dates.morning(activityMS).get('asMS') - newDate.get('asMS')
-				activity.set('timestamp', activityMS - dayOffset)
-
-				activity.save().then => @transitionToRoute('activities')
-				false
 
 	App.ActivitiesController = Ember.ArrayController.extend
 		sortProperties: ['timestamp']
@@ -85,3 +80,21 @@ define ['app', 'ember', 'emberData', 'utils/dates', 'utils/functions', 'text!/te
 		setupController: (controller, model) ->
 			@_super(controller, model)
 			@controllerFor('activities').set('selectedId', model.get('id'))
+
+	BaseActivitiesEditRoute = Ember.Route.extend
+		editType: null
+		setupController: (controller, model) ->
+			@_super(controller, model)
+			@controllerFor('activities').set('editType', @get('editType'))
+
+	App.ActivitiesEditIndexRoute = BaseActivitiesEditRoute.extend
+		editType: null
+
+	App.ActivitiesEditTagRoute = BaseActivitiesEditRoute.extend
+		editType: 'tag'
+
+	App.ActivitiesEditDeleteRoute = BaseActivitiesEditRoute.extend
+		editType: 'delete'
+
+	App.ActivitiesEditCalendarRoute = BaseActivitiesEditRoute.extend
+		editType: 'calendar'
