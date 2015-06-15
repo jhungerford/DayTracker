@@ -36,8 +36,8 @@ module.exports = (grunt) ->
 					{src: 'bower_components/handlebars/handlebars.js', dest: 'src/main/resources/web/js/libs/handlebars/handlebars.js'}
 					{src: 'bower_components/jquery/dist/jquery.js', dest: 'src/main/resources/web/js/libs/jquery/jquery.js'}
 					{src: 'bower_components/jquery-mockajax/jquery.mockjax.js', dest: 'src/main/resources/web/js/libs/jquery/jquery.mockjax.js'}
-					{src: 'bower_components/requirejs/require.js', dest: 'src/main/resources/web/js/libs/requirejs/require.js'}
-					{src: 'bower_components/requirejs-text/text.js', dest: 'src/main/resources/web/js/libs/requirejs/text.js'}
+					{src: 'bower_components/requirejs/require.js', dest: 'src/main/resources/web/js/libs/require/require.js'}
+					{src: 'bower_components/requirejs-text/text.js', dest: 'src/main/resources/web/js/libs/require/text.js'}
 					{src: 'bower_components/foundation/css/foundation.css', dest: 'src/main/resources/web/css/foundation.css'}
 					{src: 'bower_components/foundation/css/foundation.css.map', dest: 'src/main/resources/web/css/foundation.css.map'}
 				]
