@@ -12,7 +12,7 @@ data/
 # Run 'bower install' to pull them down.
 bower_components/
 src/main/resources/web/css/*.css*
-!src/main/resources/web/css/reconciler.css
+!src/main/resources/web/css/daytracker.css
 src/main/resources/web/js/libs
 src/test/resources/test-web/js/libs
 src/test/resources/test-web/css/qunit
