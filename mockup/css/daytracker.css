@@ -129,6 +129,20 @@ body {
 	background: #AAB2BD;
 }
 
+ul.tags {
+	margin-left: 0;
+	padding: 0;
+	list-style: none;
+}
+
+ul.tags li {
+	display: inline;
+}
+
+.tags li:last-child {
+	width: 100%;
+}
+
 .footer {
 	text-align: center;
 }
