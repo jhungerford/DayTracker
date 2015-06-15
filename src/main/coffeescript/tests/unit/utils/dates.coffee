@@ -3,7 +3,7 @@ define ['ember', 'utils/dates'], (Ember, Dates) ->
 		mdt = 21600000 # GMT-6
 		oldTimezone = Dates.get('localTimezoneMS')
 
-		module 'Unit: utils/dates'
+		module 'Unit: utils/dates',
 			setup: -> Dates.set('localTimezoneMS', mdt)
 			teardown: -> Dates.set('localTimezoneMS', oldTimezone)
 
