@@ -32,15 +32,14 @@ module.exports = (grunt) ->
 			bower:
 				files: [
 					{src: 'bower_components/ember/ember.js', dest: 'src/main/resources/web/js/libs/ember/ember.js'}
-					{src: 'bower_components/ember/ember-template-compiler.js', dest: 'src/main/resources/web/js/libs/ember/ember-template-compiler.js'}
+					{src: 'bower_components/ember-data/ember-data.js', dest: 'src/main/resources/web/js/libs/ember/ember-data.js'}
 					{src: 'bower_components/handlebars/handlebars.js', dest: 'src/main/resources/web/js/libs/handlebars/handlebars.js'}
 					{src: 'bower_components/jquery/dist/jquery.js', dest: 'src/main/resources/web/js/libs/jquery/jquery.js'}
+					{src: 'bower_components/jquery-mockajax/jquery.mockjax.js', dest: 'src/main/resources/web/js/libs/jquery/jquery.mockjax.js'}
 					{src: 'bower_components/requirejs/require.js', dest: 'src/main/resources/web/js/libs/requirejs/require.js'}
 					{src: 'bower_components/requirejs-text/text.js', dest: 'src/main/resources/web/js/libs/requirejs/text.js'}
 					{src: 'bower_components/foundation/css/foundation.css', dest: 'src/main/resources/web/css/foundation.css'}
 					{src: 'bower_components/foundation/css/foundation.css.map', dest: 'src/main/resources/web/css/foundation.css.map'}
-					{src: 'bower_components/dropzone/dist/dropzone-amd-module.js', dest: 'src/main/resources/web/js/libs/dropzone/dropzone.js'}
-					{src: 'bower_components/dropzone/dist/dropzone.css', dest: 'src/main/resources/web/css/dropzone.css'}
 				]
 
 	grunt.loadNpmTasks 'grunt-bower-task'
