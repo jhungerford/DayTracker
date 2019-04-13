@@ -1,57 +1,56 @@
 package dev.daytracker.model;
 
-public class Activity implements Identifyable {
-	private String id;
-	private Long userId;
-	private long timestamp;
-	private String text;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-	public Activity() {}
+import java.time.Instant;
 
-	public Activity(String id, long userId, long timestamp, String text) {
-		this.id = id;
-		this.userId = userId;
-		this.timestamp = timestamp;
-		this.text = text;
+@JsonDeserialize(builder = Activity.Builder.class)
+public class Activity {
+	public final Long id;
+	public final Instant timestamp;
+	public final String text;
+
+	private Activity(Builder builder) {
+		this.id = builder.id;
+		this.timestamp = builder.timestamp;
+		this.text = builder.text;
 	}
 
-	public String getId() {
-		return id;
+	public Builder copy() {
+		return newBuilder()
+				.withId(id)
+				.withTimestamp(timestamp)
+				.withText(text);
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public static Builder newBuilder() {
+		return new Builder();
 	}
 
-	public Long getUserId() {
-		return userId;
-	}
+	public static class Builder {
+		private Long id;
+		private Instant timestamp;
+		private String text;
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+		private Builder() {}
 
-	public long getTimestamp() {
-		return timestamp;
-	}
+		public Builder withId(long id) {
+			this.id = id;
+			return this;
+		}
 
-	public void setTimestamp(long timestamp) {
-		this.timestamp = timestamp;
-	}
+		public Builder withTimestamp(Instant timestamp) {
+			this.timestamp = timestamp;
+			return this;
+		}
 
-	public String getText() {
-		return text;
-	}
+		public Builder withText(String text) {
+			this.text = text;
+			return this;
+		}
 
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public String toString() {
-		return "Activity{" +
-				"userId=" + userId +
-				", timestamp=" + timestamp +
-				", text='" + text + '\'' +
-				'}';
+		public Activity build() {
+			return new Activity(this);
+		}
 	}
 }
