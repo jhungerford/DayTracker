@@ -3,10 +3,8 @@ package dev.daytracker.dao;
 import com.google.common.collect.ImmutableList;
 import dev.daytracker.model.Activity;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class InMemoryActivityDao implements ActivityDao {
@@ -20,17 +18,39 @@ public class InMemoryActivityDao implements ActivityDao {
   }
 
   @Override
-  public long save(Activity activity) {
-    activities.add(activity);
-    return nextId.getAndIncrement();
+  public synchronized long save(Activity activity) {
+    long id = nextId.getAndIncrement();
+
+    Activity activityWithId = activity.copy()
+        .withId(id)
+        .build();
+
+    activities.add(activityWithId);
+
+    return id;
   }
 
   @Override
-  public void update(Activity activity) {
-    throw new IllegalStateException("Not implemented"); // TODO: implement
+  public synchronized void update(Activity activity) {
+    int index = indexOf(activity);
+    if (index == -1) {
+      return;
+    }
+
+    activities.set(index, activity);
   }
 
-  public void reset() {
+  private int indexOf(Activity activity) {
+    for (int i = 0; i < activities.size(); i ++) {
+      if (activities.get(i).id.equals(activity.id)) {
+        return i;
+      }
+    }
+
+    return -1;
+  }
+
+  public synchronized void reset() {
     nextId.set(0);
     activities.clear();
   }

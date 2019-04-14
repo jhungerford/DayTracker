@@ -45,6 +45,5 @@ public class ActivityResource {
 		activityDao.update(withId);
 
 		return withId;
-
 	}
 }

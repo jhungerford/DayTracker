@@ -52,5 +52,7 @@ public class ActivityResourceTest {
 
     assertThat(created.id).isNotNull();
     assertThat(created).isEqualToIgnoringGivenFields(activity, "id");
+
+    assertThat(activityDao.findAll()).containsExactly(created);
   }
 }

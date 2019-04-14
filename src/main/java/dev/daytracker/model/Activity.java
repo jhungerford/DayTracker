@@ -1,6 +1,8 @@
 package dev.daytracker.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
 
 import java.time.LocalDate;
 
@@ -14,6 +16,30 @@ public class Activity {
 		this.id = builder.id;
 		this.date = builder.date;
 		this.text = builder.text;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Activity activity = (Activity) o;
+		return Objects.equal(id, activity.id) &&
+				Objects.equal(date, activity.date) &&
+				Objects.equal(text, activity.text);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(id, date, text);
+	}
+
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this)
+				.add("id", id)
+				.add("date", date)
+				.add("text", text)
+				.toString();
 	}
 
 	public Builder copy() {
@@ -34,7 +60,7 @@ public class Activity {
 
 		private Builder() {}
 
-		public Builder withId(long id) {
+		public Builder withId(Long id) {
 			this.id = id;
 			return this;
 		}
