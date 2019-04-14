@@ -1,5 +1,9 @@
 package dev.daytracker;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import dev.daytracker.api.ActivityResource;
 import dev.daytracker.config.DayTrackerConfiguration;
 import dev.daytracker.dao.InMemoryActivityDao;
@@ -14,7 +18,14 @@ public class DayTrackerApplication extends Application<DayTrackerConfiguration> 
 		return "DayTracker";
 	}
 
+	public static void configureJson(ObjectMapper objectMapper) {
+		objectMapper
+				.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+	}
+
 	public void initialize(Bootstrap<DayTrackerConfiguration> bootstrap) {
+		configureJson(bootstrap.getObjectMapper());
+
 //		bootstrap.addBundle(new AssetsBundle("/web", "/web", "", "web"));
 //		bootstrap.addBundle(new AssetsBundle("/html", "", "index.html", "html"));
 	}

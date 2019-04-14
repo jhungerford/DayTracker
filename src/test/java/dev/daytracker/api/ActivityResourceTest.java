@@ -10,8 +10,9 @@ import org.junit.Test;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
-import java.time.Instant;
+import java.time.LocalDate;
 
+import static dev.daytracker.DayTrackerApplication.configureJson;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ActivityResourceTest {
@@ -26,6 +27,10 @@ public class ActivityResourceTest {
       .addResource(new ActivityResource(activityDao))
       .build();
 
+  static {
+    configureJson(resources.getObjectMapper());
+  }
+
   @After
   public void tearDown() {
     activityDao.reset();
@@ -39,7 +44,7 @@ public class ActivityResourceTest {
   @Test
   public void createOneActivity() {
     Activity activity = Activity.newBuilder()
-        .withTimestamp(Instant.now())
+        .withDate(LocalDate.now())
         .withText("New activity")
         .build();
 

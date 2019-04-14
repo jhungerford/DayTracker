@@ -2,24 +2,24 @@ package dev.daytracker.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import java.time.Instant;
+import java.time.LocalDate;
 
 @JsonDeserialize(builder = Activity.Builder.class)
 public class Activity {
 	public final Long id;
-	public final Instant timestamp;
+	public final LocalDate date;
 	public final String text;
 
 	private Activity(Builder builder) {
 		this.id = builder.id;
-		this.timestamp = builder.timestamp;
+		this.date = builder.date;
 		this.text = builder.text;
 	}
 
 	public Builder copy() {
 		return newBuilder()
 				.withId(id)
-				.withTimestamp(timestamp)
+				.withDate(date)
 				.withText(text);
 	}
 
@@ -29,7 +29,7 @@ public class Activity {
 
 	public static class Builder {
 		private Long id;
-		private Instant timestamp;
+		private LocalDate date;
 		private String text;
 
 		private Builder() {}
@@ -39,8 +39,8 @@ public class Activity {
 			return this;
 		}
 
-		public Builder withTimestamp(Instant timestamp) {
-			this.timestamp = timestamp;
+		public Builder withDate(LocalDate date) {
+			this.date = date;
 			return this;
 		}
 
