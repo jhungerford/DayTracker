@@ -29,4 +29,9 @@ public class InMemoryActivityDao implements ActivityDao {
   public void update(Activity activity) {
     throw new IllegalStateException("Not implemented"); // TODO: implement
   }
+
+  public void reset() {
+    nextId.set(0);
+    activities.clear();
+  }
 }
